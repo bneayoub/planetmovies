@@ -7,31 +7,42 @@ interface Genre {
 
 interface GenreFilterProps {
   onGenreChange: (genreId: number | null) => void;
+  type: 'movies' | 'tv';
 }
 
-const GenreFilter: React.FC<GenreFilterProps> = ({ onGenreChange }) => {
+const GenreFilter: React.FC<GenreFilterProps> = ({ onGenreChange, type }) => {
   const [genres, setGenres] = useState<Genre[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchGenres = async () => {
       setIsLoading(true);
+      setError(null);
       try {
-        const response = await fetch('/api/movies/genres');
+        const response = await fetch(`/api/${type}/genre`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const data = await response.json();
         setGenres(data.genres || []);
       } catch (error) {
-        console.error('Error fetching genres:', error);
+        console.error(`Error fetching ${type} genres:`, error);
+        setError(`Failed to fetch genres. Please try again later.`);
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchGenres();
-  }, []);
+  }, [type]);
 
   if (isLoading) {
     return <div>Loading genres...</div>;
+  }
+
+  if (error) {
+    return <div className="text-red-500">{error}</div>;
   }
 
   return (
@@ -41,7 +52,7 @@ const GenreFilter: React.FC<GenreFilterProps> = ({ onGenreChange }) => {
         onChange={(e) => onGenreChange(e.target.value ? Number(e.target.value) : null)}
       >
         <option value="">All Genres</option>
-        {genres.length > 0 && genres.map((genre) => (
+        {genres.map((genre) => (
           <option key={genre.id} value={genre.id}>
             {genre.name}
           </option>

@@ -3,14 +3,26 @@ import { Search } from 'lucide-react';
 
 interface SearchBoxProps {
   onSearch: (query: string) => void;
+  type: 'movie' | 'tv';
 }
 
-const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
+const SearchBox: React.FC<SearchBoxProps> = ({ onSearch, type }) => {
   const [query, setQuery] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSearch(query);
+    if (query.trim()) {
+      try {
+        const response = await fetch(`/api/${type}/search?query=${encodeURIComponent(query)}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        onSearch(data.results);
+      } catch (error) {
+        console.error(`Error searching ${type}:`, error);
+      }
+    }
   };
 
   return (
@@ -19,7 +31,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search movies..."
+        placeholder={`Search ${type === 'movie' ? 'movies' : 'TV shows'}...`}
         className="w-full bg-white border border-gray-300 rounded-md px-4 py-2 pl-10"
       />
       <button type="submit" className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">

@@ -8,7 +8,7 @@ const BrowseNavbar: React.FC = () => {
     <nav className="bg-gray-800 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex space-x-4">
-          <Link href="/browse/movies" className="hover:text-gray-300">Movies</Link>
+          <Link href="/browse/movie" className="hover:text-gray-300">Movies</Link>
           <Link href="/browse/tv" className="hover:text-gray-300">TV Shows</Link>
           <Link href="/watchlist" className="hover:text-gray-300">Watchlist</Link>
         </div>
