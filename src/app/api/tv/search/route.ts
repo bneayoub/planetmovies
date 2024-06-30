@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
     });
     return NextResponse.json(data);
   } catch (error) {
-    console.error('Error searching tvs:', error);
-    return NextResponse.json({ error: 'Failed to search tvs' }, { status: 500 });
+    console.error('Error searching TV shows:', error);
+    return NextResponse.json({ error: 'Failed to search TV shows' }, { status: 500 });
   }
 }

@@ -4,11 +4,11 @@ import { fetchFromTMDB } from '@/utils/tmdb';
 export async function GET() {
   try {
     const data = await fetchFromTMDB({
-      path: '/tv/upcoming',
+      path: '/genre/tv/list',
     });
     return NextResponse.json(data);
   } catch (error) {
-    console.error('Error fetching upcoming tvs:', error);
-    return NextResponse.json({ error: 'Failed to fetch upcoming tvs' }, { status: 500 });
+    console.error('Error fetching TV genres:', error);
+    return NextResponse.json({ error: 'Failed to fetch TV genres' }, { status: 500 });
   }
 }
