@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import WatchlistButton from './WatchlistButton';
+import RatingComponent from './RatingComponent';
 
 interface MovieCardProps {
   movie: {
@@ -35,6 +36,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, isInWatchlist = false }) =
           title={movie.title}
           posterPath={movie.poster_path}
         />
+        <RatingComponent contentType="movie" contentId={movie.id} />
       </div>
     </div>
   );

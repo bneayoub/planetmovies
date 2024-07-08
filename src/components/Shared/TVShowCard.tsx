@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import WatchlistButton from './WatchlistButton';
+import RatingComponent from './RatingComponent';
 
 interface TVShowCardProps {
   show: {
@@ -35,6 +36,7 @@ const TVShowCard: React.FC<TVShowCardProps> = ({ show, isInWatchlist = false }) 
           title={show.name}
           posterPath={show.poster_path}
         />
+        <RatingComponent contentType="tvshow" contentId={show.id} />
       </div>
     </div>
   );
