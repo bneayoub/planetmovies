@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { auth } from '@clerk/nextjs/server';
+import { auth, clerkClient } from '@clerk/nextjs/server';
 import dbConnect from '@/lib/mongodb';
 import User from '@/models/User';
 import Watchlist from '@/models/Watchlist';
@@ -19,24 +19,43 @@ export async function POST(req: Request) {
 
     await dbConnect();
 
-    let user = await User.findOne({ clerkId: userId });
-    if (!user) {
-      user = await User.create({
-        clerkId: userId,
-        email: 'user@example.com',
-        name: 'User',
-      });
+    let clerkUser;
+    try {
+      clerkUser = await clerkClient.users.getUser(userId);
+    } catch (error) {
+      console.error('Error fetching user from Clerk:', error);
+      return NextResponse.json({ error: 'Error fetching user details' }, { status: 500 });
     }
 
-    const watchlistItem = await Watchlist.findOneAndUpdate(
-      { user: user._id, contentType, contentId },
-      { user: user._id, contentType, contentId, title, posterPath },
-      { upsert: true, new: true }
-    );
+    let user = await User.findOne({ clerkId: userId });
+    if (!user) {
+      try {
+        user = await User.create({
+          clerkId: userId,
+          email: clerkUser.emailAddresses[0]?.emailAddress || 'No email provided',
+          name: `${clerkUser.firstName || ''} ${clerkUser.lastName || ''}`.trim() || 'User',
+        });
+      } catch (error) {
+        console.error('Error creating user in database:', error);
+        return NextResponse.json({ error: 'Error creating user' }, { status: 500 });
+      }
+    }
+
+    let watchlistItem;
+    try {
+      watchlistItem = await Watchlist.findOneAndUpdate(
+        { user: user._id, contentType, contentId },
+        { user: user._id, contentType, contentId, title, posterPath },
+        { upsert: true, new: true }
+      );
+    } catch (error) {
+      console.error('Error updating watchlist:', error);
+      return NextResponse.json({ error: 'Error updating watchlist' }, { status: 500 });
+    }
 
     return NextResponse.json({ success: true, watchlistItem });
   } catch (error) {
-    console.error('Error adding to watchlist:', error);
+    console.error('Unexpected error in watchlist add route:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
