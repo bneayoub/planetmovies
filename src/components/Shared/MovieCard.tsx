@@ -28,7 +28,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, isInWatchlist = false }) =
           <h3 className="text-lg font-semibold truncate">{movie.title}</h3>
         </div>
       </Link>
-      <div className="p-4">
+      <div className="p-4 flex justify-between items-center">
         <WatchlistButton
           contentType="movie"
           contentId={movie.id}
@@ -36,7 +36,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, isInWatchlist = false }) =
           title={movie.title}
           posterPath={movie.poster_path}
         />
-        <RatingComponent contentType="movie" contentId={movie.id} />
+        <RatingComponent contentType="movie" contentId={movie.id} title={movie.title} />
       </div>
     </div>
   );
