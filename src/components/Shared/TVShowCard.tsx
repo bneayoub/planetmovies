@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import WatchlistButton from './WatchlistButton';
 
 interface TVShowCardProps {
   show: {
@@ -8,12 +9,13 @@ interface TVShowCardProps {
     name: string;
     poster_path: string;
   };
+  isInWatchlist?: boolean;
 }
 
-const TVShowCard: React.FC<TVShowCardProps> = ({ show }) => {
+const TVShowCard: React.FC<TVShowCardProps> = ({ show, isInWatchlist = false }) => {
   return (
-    <Link href={`/browse/tv/${show.id}`}>
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <Link href={`/browse/tv/${show.id}`}>
         <Image
           src={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
           alt={show.name}
@@ -24,8 +26,17 @@ const TVShowCard: React.FC<TVShowCardProps> = ({ show }) => {
         <div className="p-4">
           <h3 className="text-lg font-semibold truncate">{show.name}</h3>
         </div>
+      </Link>
+      <div className="p-4">
+        <WatchlistButton
+          contentType="tvshow"
+          contentId={show.id}
+          isInWatchlist={isInWatchlist}
+          title={show.name}
+          posterPath={show.poster_path}
+        />
       </div>
-    </Link>
+    </div>
   );
 };
 
