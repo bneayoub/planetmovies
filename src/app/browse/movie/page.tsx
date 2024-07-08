@@ -1,4 +1,3 @@
-// app/movie/page.tsx
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -11,7 +10,6 @@ interface Movie {
   id: number;
   title: string;
   genre_ids: number[];
-  // Add other relevant fields
 }
 
 const MoviesPage: React.FC = () => {
