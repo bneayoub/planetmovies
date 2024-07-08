@@ -28,7 +28,7 @@ const TVShowCard: React.FC<TVShowCardProps> = ({ show, isInWatchlist = false }) 
           <h3 className="text-lg font-semibold truncate">{show.name}</h3>
         </div>
       </Link>
-      <div className="p-4">
+      <div className="p-4 flex justify-between items-center">
         <WatchlistButton
           contentType="tvshow"
           contentId={show.id}
@@ -36,7 +36,7 @@ const TVShowCard: React.FC<TVShowCardProps> = ({ show, isInWatchlist = false }) 
           title={show.name}
           posterPath={show.poster_path}
         />
-        <RatingComponent contentType="tvshow" contentId={show.id} />
+        <RatingComponent contentType="tvshow" contentId={show.id} title={show.name} />
       </div>
     </div>
   );

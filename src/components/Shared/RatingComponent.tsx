@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Star } from 'lucide-react';
+import RatingModal from './RatingModal';
 
 interface RatingComponentProps {
   contentType: 'movie' | 'tvshow';
   contentId: number;
-  initialRating?: number;
+  title: string;
 }
 
-const RatingComponent: React.FC<RatingComponentProps> = ({ contentType, contentId, initialRating = 0 }) => {
-  const [rating, setRating] = useState<number>(initialRating);
-  const [hoveredRating, setHoveredRating] = useState<number>(0);
+const RatingComponent: React.FC<RatingComponentProps> = ({ contentType, contentId, title }) => {
+  const [rating, setRating] = useState<number | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchRating = async () => {
@@ -27,7 +28,7 @@ const RatingComponent: React.FC<RatingComponentProps> = ({ contentType, contentI
     fetchRating();
   }, [contentType, contentId]);
 
-  const handleRating = async (newRating: number) => {
+  const handleRatingSubmit = async (newRating: number) => {
     try {
       const response = await fetch('/api/ratings/add', {
         method: 'POST',
@@ -48,20 +49,25 @@ const RatingComponent: React.FC<RatingComponentProps> = ({ contentType, contentI
   };
 
   return (
-    <div className="flex items-center">
-      {[1, 2, 3, 4, 5].map((star) => (
+    <>
+      <button onClick={() => setIsModalOpen(true)} className="flex items-center">
         <Star
-          key={star}
           size={20}
-          fill={star <= (hoveredRating || rating) ? 'gold' : 'none'}
-          stroke={star <= (hoveredRating || rating) ? 'gold' : 'currentColor'}
-          className="cursor-pointer"
-          onMouseEnter={() => setHoveredRating(star)}
-          onMouseLeave={() => setHoveredRating(0)}
-          onClick={() => handleRating(star)}
+          fill={rating ? 'gold' : 'none'}
+          stroke={rating ? 'gold' : 'currentColor'}
         />
-      ))}
-    </div>
+        {rating && <span className="ml-1">{rating}/10</span>}
+      </button>
+      {isModalOpen && (
+        <RatingModal
+          contentType={contentType}
+          contentId={contentId}
+          title={title}
+          onClose={() => setIsModalOpen(false)}
+          onRatingSubmit={handleRatingSubmit}
+        />
+      )}
+    </>
   );
 };
 
