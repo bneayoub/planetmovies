@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { auth } from '@clerk/nextjs/server';
+import { auth, clerkClient } from '@clerk/nextjs/server';
 import dbConnect from '@/lib/mongodb';
 import User from '@/models/User';
 import Rating from '@/models/Rating';
@@ -23,9 +23,15 @@ export async function POST(request: Request) {
 
     await dbConnect();
 
-    const user = await User.findOne({ clerkId: userId });
+    const clerkUser = await clerkClient.users.getUser(userId);
+
+    let user = await User.findOne({ clerkId: userId });
     if (!user) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+      user = await User.create({
+        clerkId: userId,
+        email: clerkUser.emailAddresses[0]?.emailAddress || 'No email provided',
+        name: `${clerkUser.firstName || ''} ${clerkUser.lastName || ''}`.trim() || 'User',
+      });
     }
 
     const ratingItem = await Rating.findOneAndUpdate(
@@ -34,7 +40,7 @@ export async function POST(request: Request) {
       { upsert: true, new: true }
     );
 
-    return NextResponse.json(ratingItem);
+    return NextResponse.json({ success: true, rating: ratingItem });
   } catch (error) {
     console.error('Error adding/updating rating:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
