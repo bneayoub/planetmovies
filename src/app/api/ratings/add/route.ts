@@ -17,8 +17,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    if (rating < 1 || rating > 5) {
-      return NextResponse.json({ error: 'Rating must be between 1 and 5' }, { status: 400 });
+    if (rating < 1 || rating > 10) {
+      return NextResponse.json({ error: 'Rating must be between 1 and 10' }, { status: 400 });
     }
 
     await dbConnect();
