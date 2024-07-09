@@ -50,9 +50,11 @@ const WatchlistButton: React.FC<WatchlistButtonProps> = ({ contentType, contentI
   return (
     <button
       onClick={handleWatchlistToggle}
-      className={`px-4 py-2 rounded ${
-        inWatchlist ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-500 hover:bg-blue-600'
-      } text-white`}
+      className={`px-4 py-2 rounded text-skin-inverted transition-colors ${
+        inWatchlist
+          ? 'bg-[var(--color-button-remove)] hover:bg-[var(--color-button-remove-hover)]'
+          : 'bg-[var(--color-button-add)] hover:bg-[var(--color-button-add-hover)]'
+      }`}
     >
       {inWatchlist ? 'Remove from Watchlist' : 'Add to Watchlist'}
     </button>

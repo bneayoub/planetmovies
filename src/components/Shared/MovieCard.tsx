@@ -15,7 +15,7 @@ interface MovieCardProps {
 
 const MovieCard: React.FC<MovieCardProps> = ({ movie, isInWatchlist = false }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="bg-skin-fill rounded-lg shadow-md overflow-hidden">
       <Link href={`/browse/movie/${movie.id}`}>
         <Image
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

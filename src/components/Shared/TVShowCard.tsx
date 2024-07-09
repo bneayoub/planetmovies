@@ -15,7 +15,7 @@ interface TVShowCardProps {
 
 const TVShowCard: React.FC<TVShowCardProps> = ({ show, isInWatchlist = false }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="bg-skin-fill rounded-lg shadow-md overflow-hidden">
       <Link href={`/browse/tv/${show.id}`}>
         <Image
           src={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
