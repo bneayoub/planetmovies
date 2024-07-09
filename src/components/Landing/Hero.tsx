@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 const Hero = () => {
   return (
@@ -8,17 +11,44 @@ const Hero = () => {
         className="absolute inset-0 bg-cover bg-center z-0"
         style={{backgroundImage: "url('/images/hero-background.jpg')"}}
       ></div>
-      <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
-      <div className="z-20 text-center">
-        <h1 className="text-5xl font-bold mb-4">Welcome to Cinevault</h1>
-        <p className="text-xl mb-8">Discover your next favorite movie or TV show</p>
-        <Link
-          href="/browse"
-          className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+
+      <div className="absolute inset-0 bg-black opacity-90 z-10"></div>
+
+      <motion.div
+        className="z-20 text-center px-4 max-w-3xl"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <motion.h1
+          className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.8 }}
         >
-          Browse Now
-        </Link>
-      </div>
+          Welcome to Cinevault
+        </motion.h1>
+        <motion.p
+          className="text-xl md:text-2xl mb-8 text-gray-200"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
+        >
+          Discover your next favorite movie or TV show
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+        >
+          <Link
+            href="/browse"
+            className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 text-lg"
+          >
+            Browse Now
+          </Link>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };
