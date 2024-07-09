@@ -5,6 +5,10 @@
 	--color-text-inverted: #ffffff;
 	--color-button-accent: #2563eb;
 	--color-button-accent-hover: #1d4ed8;
+	--color-button-add: #3b82f6;
+	--color-button-add-hover: #2563eb;
+	--color-button-remove: #ef4444;
+	--color-button-remove-hover: #dc2626;
   }
 
   .dark {
@@ -14,6 +18,10 @@
 	--color-text-inverted: #1f2937;
 	--color-button-accent: #3b82f6;
 	--color-button-accent-hover: #60a5fa;
+	--color-button-add: #60a5fa;
+	--color-button-add-hover: #3b82f6;
+	--color-button-remove: #f87171;
+	--color-button-remove-hover: #ef4444;
   }
 
   html.transition,
