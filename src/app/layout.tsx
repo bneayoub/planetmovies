@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton
-} from '@clerk/nextjs'
+import { ClerkProvider } from '@clerk/nextjs'
+import { DarkModeProvider } from '@/components/DarkModeProvider';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,11 +18,15 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-    <html lang="en">
-      <body className={inter.className}>
-        {children}
-      </body>
-    </html>
+      <html lang="en" className="h-full">
+        <body className={`${inter.className} h-full bg-skin-fill text-skin-base`}>
+          <DarkModeProvider>
+            <div className="min-h-screen">
+              {children}
+            </div>
+          </DarkModeProvider>
+        </body>
+      </html>
     </ClerkProvider>
   );
 }
