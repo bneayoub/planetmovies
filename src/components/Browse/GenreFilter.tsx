@@ -48,7 +48,7 @@ const GenreFilter: React.FC<GenreFilterProps> = ({ onGenreChange, type }) => {
   return (
     <div className="mb-4">
       <select
-        className="bg-white border border-gray-300 rounded-md px-4 py-2"
+        className="bg-skin-fill border border-skin-muted rounded-md px-4 py-2"
         onChange={(e) => onGenreChange(e.target.value ? Number(e.target.value) : null)}
       >
         <option value="">All Genres</option>

@@ -32,7 +32,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch, type }) => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder={`Search ${type === 'movie' ? 'movies' : 'TV shows'}...`}
-        className="w-full bg-white border border-gray-300 rounded-md px-4 py-2 pl-10"
+        className="w-full bg-skin-fill border border-skin-muted rounded-md px-4 py-2 pl-10"
       />
       <button type="submit" className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
         <Search />
