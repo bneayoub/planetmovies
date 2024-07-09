@@ -60,18 +60,21 @@ const MoviesPage: React.FC = () => {
   };
 
   return (
-    <div>
-      <div className="mb-8">
-        <GenreFilter onGenreChange={handleGenreChange} type="movie" />
-        <SearchBox onSearch={handleSearch} type="movie" />
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <div className="container mx-auto px-4 py-8">
+        <div className="mb-8">
+          <GenreFilter onGenreChange={handleGenreChange} type="movie" />
+          <SearchBox onSearch={handleSearch} type="movie" />
+        </div>
+        <MovingGrid items={filteredMovies.slice(0, 10)} title="Trending Movies" type="movie" />
+        <HorizontalScroll items={filteredMovies.slice(10, 20)} title="Now Playing" type="movie" />
+        <HorizontalScroll items={filteredMovies.slice(20, 30)} title="Upcoming" type="movie" />
+        <HorizontalScroll items={filteredMovies.slice(30, 40)} title="Top Rated" type="movie" />
+        <HorizontalScroll items={filteredMovies.slice(40, 50)} title="Popular" type="movie" />
       </div>
-      <MovingGrid items={filteredMovies.slice(0, 10)} title="Trending Movies" type="movie" />
-      <HorizontalScroll items={filteredMovies.slice(10, 20)} title="Now Playing" type="movie" />
-      <HorizontalScroll items={filteredMovies.slice(20, 30)} title="Upcoming" type="movie" />
-      <HorizontalScroll items={filteredMovies.slice(30, 40)} title="Top Rated" type="movie" />
-      <HorizontalScroll items={filteredMovies.slice(40, 50)} title="Popular" type="movie" />
     </div>
   );
 };
+
 
 export default MoviesPage;
