@@ -5,6 +5,7 @@ import MovingGrid from '@/components/Browse/MovingGrid';
 import HorizontalScroll from '@/components/Browse/HorizontalScroll';
 import GenreFilter from '@/components/Browse/GenreFilter';
 import SearchBox from '@/components/Browse/SearchBox';
+import { WatchlistProvider } from '@/contexts/WatchlistContext';
 
 interface TVShow {
   id: number;
@@ -78,6 +79,7 @@ const TVShowsPage: React.FC = () => {
   };
 
   return (
+    <WatchlistProvider>
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
@@ -97,6 +99,7 @@ const TVShowsPage: React.FC = () => {
         )}
       </div>
     </div>
+    </WatchlistProvider>
   );
 };
 
