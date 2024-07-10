@@ -7,7 +7,7 @@ interface Genre {
 
 interface GenreFilterProps {
   onGenreChange: (genreId: number | null) => void;
-  type: 'movies' | 'tv';
+  type: 'movie' | 'tv';
 }
 
 const GenreFilter: React.FC<GenreFilterProps> = ({ onGenreChange, type }) => {
