@@ -27,6 +27,7 @@ export const WatchlistProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   useEffect(() => {
     const fetchWatchlist = async () => {
       if (!userId) {
+        setWatchlist([]);
         setIsLoading(false);
         return;
       }
@@ -53,6 +54,8 @@ export const WatchlistProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   }, [userId]);
 
   const addToWatchlist = async (item: WatchlistItem) => {
+    if (!userId) return;
+
     try {
       const response = await fetch('/api/watchlist/add', {
         method: 'POST',
@@ -68,6 +71,8 @@ export const WatchlistProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   };
 
   const removeFromWatchlist = async (item: Pick<WatchlistItem, 'contentType' | 'contentId'>) => {
+    if (!userId) return;
+
     try {
       const response = await fetch('/api/watchlist/remove', {
         method: 'POST',
