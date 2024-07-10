@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import { X, Star } from 'lucide-react';
+import { useRating } from '@/contexts/RatingContext';
 
 interface RatingModalProps {
   contentType: 'movie' | 'tvshow';
   contentId: number;
   title: string;
   onClose: () => void;
-  onRatingSubmit: (rating: number) => void;
 }
 
-const RatingModal: React.FC<RatingModalProps> = ({ contentType, contentId, title, onClose, onRatingSubmit }) => {
-  const [rating, setRating] = useState<number>(5);
+const RatingModal: React.FC<RatingModalProps> = ({ contentType, contentId, title, onClose }) => {
+  const { addOrUpdateRating, getRating } = useRating();
+  const [rating, setRating] = useState<number>(getRating(contentType, contentId) || 5);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onRatingSubmit(rating);
+    await addOrUpdateRating({ contentType, contentId, rating });
     onClose();
   };
 

@@ -1,8 +1,11 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Star } from 'lucide-react';
+import { useAuth } from '@clerk/nextjs';
+import { useRating } from '@/contexts/RatingContext';
 import RatingModal from './RatingModal';
+import SignInModal from './SignInModal';
 
 interface RatingComponentProps {
   contentType: 'movie' | 'tvshow';
@@ -11,48 +14,28 @@ interface RatingComponentProps {
 }
 
 const RatingComponent: React.FC<RatingComponentProps> = ({ contentType, contentId, title }) => {
-  const [rating, setRating] = useState<number | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { userId } = useAuth();
+  const { getRating, isLoading } = useRating();
+  const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
 
-  useEffect(() => {
-    const fetchRating = async () => {
-      try {
-        const response = await fetch(`/api/ratings/get?contentType=${contentType}&contentId=${contentId}`);
-        if (response.ok) {
-          const data = await response.json();
-          setRating(data.rating);
-        }
-      } catch (error) {
-        console.error('Error fetching rating:', error);
-      }
-    };
+  const rating = getRating(contentType, contentId);
 
-    fetchRating();
-  }, [contentType, contentId]);
-
-  const handleRatingSubmit = async (newRating: number) => {
-    try {
-      const response = await fetch('/api/ratings/add', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ contentType, contentId, rating: newRating }),
-      });
-
-      if (response.ok) {
-        setRating(newRating);
-      } else {
-        console.error('Failed to update rating');
-      }
-    } catch (error) {
-      console.error('Error updating rating:', error);
+  const handleRatingClick = () => {
+    if (!userId) {
+      setIsSignInModalOpen(true);
+    } else {
+      setIsRatingModalOpen(true);
     }
   };
 
+  if (isLoading) {
+    return <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse"></div>;
+  }
+
   return (
     <>
-      <button onClick={() => setIsModalOpen(true)} className="flex items-center">
+      <button onClick={handleRatingClick} className="flex items-center">
         <Star
           size={20}
           fill={rating ? 'gold' : 'none'}
@@ -60,15 +43,18 @@ const RatingComponent: React.FC<RatingComponentProps> = ({ contentType, contentI
         />
         {rating && <span className="ml-1">{rating}/10</span>}
       </button>
-      {isModalOpen && (
+      {isRatingModalOpen && (
         <RatingModal
           contentType={contentType}
           contentId={contentId}
           title={title}
-          onClose={() => setIsModalOpen(false)}
-          onRatingSubmit={handleRatingSubmit}
+          onClose={() => setIsRatingModalOpen(false)}
         />
       )}
+      <SignInModal
+        isOpen={isSignInModalOpen}
+        onClose={() => setIsSignInModalOpen(false)}
+      />
     </>
   );
 };
