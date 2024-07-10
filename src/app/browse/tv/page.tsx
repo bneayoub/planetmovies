@@ -64,28 +64,38 @@ const TVShowsPage: React.FC = () => {
     setIsSearching(false);
   };
 
-  const handleSearch = async (searchResults: TVShow[]) => {
-    setIsSearching(true);
-    setFilteredTVShows(searchResults);
+  const handleSearch = (searchResults: TVShow[]) => {
+    if (searchResults.length > 0) {
+      setIsSearching(true);
+      setFilteredTVShows(searchResults);
+    } else {
+      setIsSearching(false);
+      setFilteredTVShows(selectedGenre
+        ? tvShows.filter(show => show.genre_ids.includes(selectedGenre))
+        : tvShows
+      );
+    }
   };
 
   return (
-    <div>
-      <div className="mb-8">
-        <GenreFilter onGenreChange={handleGenreChange} type="tv" />
-        <SearchBox onSearch={handleSearch} type="tv" />
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <div className="container mx-auto px-4 py-8">
+        <div className="mb-8">
+          <GenreFilter onGenreChange={handleGenreChange} type="tv" />
+          <SearchBox onSearch={handleSearch} type="tv" />
+        </div>
+        {isSearching ? (
+          <MovingGrid items={filteredTVShows} title="Search Results" type="tv" />
+        ) : (
+          <>
+            <MovingGrid items={filteredTVShows.slice(0, 10)} title="Trending TV Shows" type="tv" />
+            <HorizontalScroll items={filteredTVShows.slice(10, 20)} title="Airing Today" type="tv" />
+            <HorizontalScroll items={filteredTVShows.slice(20, 30)} title="On The Air" type="tv" />
+            <HorizontalScroll items={filteredTVShows.slice(30, 40)} title="Top Rated" type="tv" />
+            <HorizontalScroll items={filteredTVShows.slice(40, 50)} title="Popular" type="tv" />
+          </>
+        )}
       </div>
-      {isSearching ? (
-        <MovingGrid items={filteredTVShows} title="Search Results" type="tv" />
-      ) : (
-        <>
-          <MovingGrid items={filteredTVShows.slice(0, 10)} title="Trending TV Shows" type="tv" />
-          <HorizontalScroll items={filteredTVShows.slice(10, 20)} title="Airing Today" type="tv" />
-          <HorizontalScroll items={filteredTVShows.slice(20, 30)} title="On The Air" type="tv" />
-          <HorizontalScroll items={filteredTVShows.slice(30, 40)} title="Top Rated" type="tv" />
-          <HorizontalScroll items={filteredTVShows.slice(40, 50)} title="Popular" type="tv" />
-        </>
-      )}
     </div>
   );
 };
