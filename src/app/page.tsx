@@ -17,7 +17,14 @@ const LandingPage = () => {
       {/* Top Navbar */}
       <nav className="bg-gray-800 text-white p-4">
         <div className="container mx-auto flex justify-between items-center">
-          <Link href="/" className="text-xl font-bold">Cinevault</Link>
+        <Link href="/" className="flex items-center">
+        <img
+            src="/logos/logo.png"
+            alt="Cinevault Logo"
+            className="max-h-40 max-w-40 mr-2"
+            style={{ height: 'auto', width: 'auto' }}
+          />
+        </Link>
           <div className="space-x-4">
             <Link href="#about">About Us</Link>
             <Link href="#services">Our Services</Link>
