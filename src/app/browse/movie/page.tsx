@@ -65,8 +65,16 @@ const MoviesPage: React.FC = () => {
   };
 
   const handleSearch = (searchResults: Movie[]) => {
-    setIsSearching(true);
-    setFilteredMovies(searchResults);
+    if (searchResults.length > 0) {
+      setIsSearching(true);
+      setFilteredMovies(searchResults);
+    } else {
+      setIsSearching(false);
+      setFilteredMovies(selectedGenre
+        ? movies.filter(movie => movie.genre_ids.includes(selectedGenre))
+        : movies
+      );
+    }
   };
 
   return (
