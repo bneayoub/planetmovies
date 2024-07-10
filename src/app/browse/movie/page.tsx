@@ -16,6 +16,7 @@ const MoviesPage: React.FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
   const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
+  const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -46,16 +47,25 @@ const MoviesPage: React.FC = () => {
     fetchMovies();
   }, []);
 
+  useEffect(() => {
+    if (!isSearching) {
+      let result = movies;
+
+      if (selectedGenre) {
+        result = result.filter(movie => movie.genre_ids.includes(selectedGenre));
+      }
+
+      setFilteredMovies(result);
+    }
+  }, [movies, selectedGenre, isSearching]);
+
   const handleGenreChange = (genreId: number | null) => {
     setSelectedGenre(genreId);
-    if (genreId) {
-      setFilteredMovies(movies.filter(movie => movie.genre_ids.includes(genreId)));
-    } else {
-      setFilteredMovies(movies);
-    }
+    setIsSearching(false);
   };
 
   const handleSearch = (searchResults: Movie[]) => {
+    setIsSearching(true);
     setFilteredMovies(searchResults);
   };
 
@@ -66,15 +76,20 @@ const MoviesPage: React.FC = () => {
           <GenreFilter onGenreChange={handleGenreChange} type="movie" />
           <SearchBox onSearch={handleSearch} type="movie" />
         </div>
-        <MovingGrid items={filteredMovies.slice(0, 10)} title="Trending Movies" type="movie" />
-        <HorizontalScroll items={filteredMovies.slice(10, 20)} title="Now Playing" type="movie" />
-        <HorizontalScroll items={filteredMovies.slice(20, 30)} title="Upcoming" type="movie" />
-        <HorizontalScroll items={filteredMovies.slice(30, 40)} title="Top Rated" type="movie" />
-        <HorizontalScroll items={filteredMovies.slice(40, 50)} title="Popular" type="movie" />
+        {isSearching ? (
+          <MovingGrid items={filteredMovies} title="Search Results" type="movie" />
+        ) : (
+          <>
+            <MovingGrid items={filteredMovies.slice(0, 10)} title="Trending Movies" type="movie" />
+            <HorizontalScroll items={filteredMovies.slice(10, 20)} title="Now Playing" type="movie" />
+            <HorizontalScroll items={filteredMovies.slice(20, 30)} title="Upcoming" type="movie" />
+            <HorizontalScroll items={filteredMovies.slice(30, 40)} title="Top Rated" type="movie" />
+            <HorizontalScroll items={filteredMovies.slice(40, 50)} title="Popular" type="movie" />
+          </>
+        )}
       </div>
     </div>
   );
 };
-
 
 export default MoviesPage;

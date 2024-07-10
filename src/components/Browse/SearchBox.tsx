@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 
 interface SearchBoxProps {
-  onSearch: (query: string) => void;
+  onSearch: (results: any[]) => void;
   type: 'movie' | 'tv';
 }
 

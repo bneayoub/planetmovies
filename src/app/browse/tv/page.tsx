@@ -64,24 +64,9 @@ const TVShowsPage: React.FC = () => {
     setIsSearching(false);
   };
 
-  const handleSearch = async (query: string) => {
+  const handleSearch = async (searchResults: TVShow[]) => {
     setIsSearching(true);
-    if (query.trim()) {
-      try {
-        const response = await fetch(`/api/tv/search?query=${encodeURIComponent(query)}`);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setFilteredTVShows(data.results);
-      } catch (error) {
-        console.error('Error searching TV shows:', error);
-        setFilteredTVShows([]);
-      }
-    } else {
-      setIsSearching(false);
-      setFilteredTVShows(tvShows);
-    }
+    setFilteredTVShows(searchResults);
   };
 
   return (
