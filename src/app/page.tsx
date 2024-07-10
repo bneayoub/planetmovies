@@ -20,9 +20,9 @@ const LandingPage = () => {
           </div>
           <div className="flex items-center space-x-4">
             <SignedOut>
-              <SignInButton
-                className="bg-purple-500 px-4 py-2 rounded-full text-white hover:bg-purple-600"
-              />
+            <div className="bg-purple-500 px-4 py-2 rounded-full text-white hover:bg-purple-600">
+              <SignInButton />
+            </div>
             </SignedOut>
             <SignedIn>
               <UserButton />
