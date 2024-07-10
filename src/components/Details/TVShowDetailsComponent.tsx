@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Star, Calendar, List, X } from 'lucide-react';
 import WatchlistButton from '@/components/Shared/WatchlistButton';
 import RatingComponent from '@/components/Shared/RatingComponent';
+import SimilarContent from '@/components/Shared/SimilarContent';
 
 interface TVShowDetailsProps {
   tvShow: {
@@ -36,6 +37,11 @@ interface TVShowDetailsProps {
       poster_path: string;
       season_number: number;
     }[];
+    similarTVShows: Array<{
+      id: number;
+      name: string;
+      poster_path: string;
+    }>;
   };
 }
 
@@ -111,25 +117,7 @@ const TVShowDetailsComponent: React.FC<TVShowDetailsProps> = ({ tvShow }) => {
           )}
         </div>
       </div>
-
-      {trailers.length > 0 && (
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold mb-4">Trailers</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {trailers.map((trailer) => (
-              <div key={trailer.key} className="aspect-w-16 aspect-h-9">
-                <iframe
-                  src={`https://www.youtube.com/embed/${trailer.key}`}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full rounded-lg"
-                ></iframe>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
+      
       <div className="mt-8">
         <h2 className="text-2xl font-bold mb-4">Seasons</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -150,6 +138,28 @@ const TVShowDetailsComponent: React.FC<TVShowDetailsProps> = ({ tvShow }) => {
           ))}
         </div>
       </div>
+
+      {trailers.length > 0 && (
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold mb-4">Trailers</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {trailers.map((trailer) => (
+              <div key={trailer.key} className="aspect-w-16 aspect-h-9">
+                <iframe
+                  src={`https://www.youtube.com/embed/${trailer.key}`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full rounded-lg"
+                ></iframe>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {tvShow.similarTVShows && tvShow.similarTVShows.length > 0 && (
+        <SimilarContent items={tvShow.similarTVShows} contentType="tv" />
+      )}
 
       {showAllCast && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">

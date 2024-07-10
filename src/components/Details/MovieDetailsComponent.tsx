@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Star, Clock, Calendar, X } from 'lucide-react';
 import WatchlistButton from '@/components/Shared/WatchlistButton';
 import RatingComponent from '@/components/Shared/RatingComponent';
+import SimilarContent from '@/components/Shared/SimilarContent';
 
 interface MovieDetailsProps {
   movie: {
@@ -27,6 +28,11 @@ interface MovieDetailsProps {
         type: string;
       }[];
     };
+    similarMovies: Array<{
+      id: number;
+      title: string;
+      poster_path: string;
+    }>;
   };
 }
 
@@ -119,6 +125,10 @@ const MovieDetailsComponent: React.FC<MovieDetailsProps> = ({ movie }) => {
             ))}
           </div>
         </div>
+      )}
+
+      {movie.similarMovies && movie.similarMovies.length > 0 && (
+        <SimilarContent items={movie.similarMovies} contentType="movie" />
       )}
 
       {showAllCast && (
