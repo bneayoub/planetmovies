@@ -68,7 +68,6 @@ const MovieDetailsComponent: React.FC<MovieDetailsProps> = ({ movie }) => {
             <WatchlistButton
               contentType="movie"
               contentId={movie.id}
-              isInWatchlist={false}
               title={movie.title}
               posterPath={movie.poster_path}
             />

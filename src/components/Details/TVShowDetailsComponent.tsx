@@ -77,7 +77,6 @@ const TVShowDetailsComponent: React.FC<TVShowDetailsProps> = ({ tvShow }) => {
             <WatchlistButton
               contentType="tvshow"
               contentId={tvShow.id}
-              isInWatchlist={false}
               title={tvShow.name}
               posterPath={tvShow.poster_path}
             />
