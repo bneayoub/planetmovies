@@ -23,6 +23,10 @@ const config: Config = {
           inverted: 'var(--color-text-inverted)',
         },
       },
+      red: {
+        600: '#dc2626',
+        700: '#b91c1c',
+      },
     },
   },
   plugins: [],
