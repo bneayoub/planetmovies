@@ -10,33 +10,35 @@ interface MovieCardProps {
     title: string;
     poster_path: string;
   };
-  isInWatchlist?: boolean;
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ movie, isInWatchlist = false }) => {
+const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
   return (
-    <div className="bg-skin-fill rounded-lg shadow-md overflow-hidden">
-      <Link href={`/browse/movie/${movie.id}`}>
-        <Image
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          alt={movie.title}
-          width={500}
-          height={750}
-          className="w-full h-auto"
-        />
+    <div className="bg-skin-fill rounded-lg shadow-md overflow-hidden flex flex-col">
+      <Link href={`/browse/movie/${movie.id}`} className="flex-grow">
+        <div className="relative aspect-[2/3]">
+          <Image
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            alt={movie.title}
+            layout="fill"
+            objectFit="cover"
+            className="rounded-t-lg"
+          />
+        </div>
         <div className="p-4">
           <h3 className="text-lg font-semibold truncate">{movie.title}</h3>
         </div>
       </Link>
-      <div className="p-4 flex justify-between items-center">
+      <div className="p-4 mt-auto">
         <WatchlistButton
           contentType="movie"
           contentId={movie.id}
-          isInWatchlist={isInWatchlist}
           title={movie.title}
           posterPath={movie.poster_path}
         />
-        <RatingComponent contentType="movie" contentId={movie.id} title={movie.title} />
+        <div className="mt-2 flex justify-center">
+          <RatingComponent contentType="movie" contentId={movie.id} title={movie.title} />
+        </div>
       </div>
     </div>
   );
