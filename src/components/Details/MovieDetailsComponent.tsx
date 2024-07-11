@@ -128,7 +128,11 @@ const MovieDetailsComponent: React.FC<MovieDetailsProps> = ({ movie }) => {
       )}
 
       {movie.similarMovies && movie.similarMovies.length > 0 && (
-        <SimilarContent items={movie.similarMovies} contentType="movie" />
+        <SimilarContent
+          items={movie.similarMovies}
+          contentType="movie"
+          title="Similar Movies"
+        />
       )}
 
       {showAllCast && (

@@ -117,7 +117,7 @@ const TVShowDetailsComponent: React.FC<TVShowDetailsProps> = ({ tvShow }) => {
           )}
         </div>
       </div>
-      
+
       <div className="mt-8">
         <h2 className="text-2xl font-bold mb-4">Seasons</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -158,9 +158,12 @@ const TVShowDetailsComponent: React.FC<TVShowDetailsProps> = ({ tvShow }) => {
       )}
 
       {tvShow.similarTVShows && tvShow.similarTVShows.length > 0 && (
-        <SimilarContent items={tvShow.similarTVShows} contentType="tv" />
+        <SimilarContent
+          items={tvShow.similarTVShows}
+          contentType="tv"
+          title="Similar TV Shows"
+        />
       )}
-
       {showAllCast && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-8 max-w-4xl max-h-[90vh] overflow-y-auto">
