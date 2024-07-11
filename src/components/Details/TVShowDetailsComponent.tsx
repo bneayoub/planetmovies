@@ -6,7 +6,7 @@ import { Star, Calendar, List, X } from 'lucide-react';
 import WatchlistButton from '@/components/Shared/WatchlistButton';
 import RatingComponent from '@/components/Shared/RatingComponent';
 import SimilarContent from '@/components/Shared/SimilarContent';
-
+import CommentSection from '@/components/Shared/CommentSection';
 interface TVShowDetailsProps {
   tvShow: {
     id: number;
@@ -191,6 +191,8 @@ const TVShowDetailsComponent: React.FC<TVShowDetailsProps> = ({ tvShow }) => {
           </div>
         </div>
       )}
+
+      <CommentSection contentType="tvshow" contentId={tvShow.id} />
     </div>
   );
 };
