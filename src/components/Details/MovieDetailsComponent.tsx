@@ -6,6 +6,7 @@ import { Star, Clock, Calendar, X } from 'lucide-react';
 import WatchlistButton from '@/components/Shared/WatchlistButton';
 import RatingComponent from '@/components/Shared/RatingComponent';
 import SimilarContent from '@/components/Shared/SimilarContent';
+import CommentSection from '@/components/Shared/CommentSection';
 
 interface MovieDetailsProps {
   movie: {
@@ -162,6 +163,8 @@ const MovieDetailsComponent: React.FC<MovieDetailsProps> = ({ movie }) => {
           </div>
         </div>
       )}
+
+    <CommentSection contentType="movie" contentId={movie.id} />
     </div>
   );
 };
