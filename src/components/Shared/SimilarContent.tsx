@@ -2,20 +2,27 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-interface SimilarContentProps {
-  items: Array<{
-    id: number;
-    title?: string;
-    name?: string;
-    poster_path: string;
-  }>;
-  contentType: 'movie' | 'tv';
+interface Content {
+  id: number;
+  title?: string;
+  name?: string;
+  poster_path: string;
 }
 
-const SimilarContent: React.FC<SimilarContentProps> = ({ items, contentType }) => {
+interface SimilarContentProps {
+  items: Content[];
+  contentType: 'movie' | 'tv';
+  title?: string;
+}
+
+const SimilarContent: React.FC<SimilarContentProps> = ({ items, contentType, title }) => {
+  if (items.length === 0) {
+    return null;
+  }
+
   return (
     <div className="mt-8">
-      <h2 className="text-2xl font-bold mb-4">Similar {contentType === 'movie' ? 'Movies' : 'TV Shows'}</h2>
+      {title && <h2 className="text-2xl font-bold mb-4">{title}</h2>}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {items.slice(0, 10).map((item) => (
           <Link href={`/browse/${contentType}/${item.id}`} key={item.id}>
