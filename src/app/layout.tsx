@@ -4,6 +4,7 @@ import "./globals.css";
 import { ClerkProvider } from '@clerk/nextjs'
 import { DarkModeProvider } from '@/components/DarkModeProvider';
 import { RatingProvider } from "@/contexts/RatingContext";
+import TopNavbar from "@/components/Landing/TopNavbar";
 
 const inter = Inter({ subsets: ["latin"] });
 

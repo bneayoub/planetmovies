@@ -8,7 +8,7 @@ const Hero = () => {
   return (
     <div className="relative h-screen flex items-center justify-center text-white">
       <div
-        className="absolute inset-0 bg-cover bg-center z-0"
+        className="absolute inset-0 bg-cover bg-center bg-auto z-0"
         style={{backgroundImage: "url('/images/hero-background.jpg')"}}
       ></div>
 
