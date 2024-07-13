@@ -42,7 +42,7 @@ const Hero = () => {
           transition={{ delay: 0.6, duration: 0.8 }}
         >
           <Link
-            href="/browse"
+            href="/browse/movie"
             className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 text-lg"
           >
             Browse Now
