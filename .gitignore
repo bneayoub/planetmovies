@@ -33,6 +33,7 @@ yarn-error.log*
 
 #struct
 codebase.md
+codebase.txt
 
 # typescript
 *.tsbuildinfo
