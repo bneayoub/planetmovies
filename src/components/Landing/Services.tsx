@@ -19,7 +19,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon: Icon, title, descriptio
         <p className="text-gray-600 dark:text-gray-300">{description}</p>
       </div>
       <div className="px-6 py-4 bg-gray-50 dark:bg-gray-700">
-        <a href="#" className="text-red-600 dark:text-red-400 font-medium hover:underline">Learn more &rarr;</a>
+        <a href="/blog" className="text-red-600 dark:text-red-400 font-medium hover:underline">Learn more &rarr;</a>
       </div>
     </div>
   </ScrollAnimation>
@@ -64,7 +64,7 @@ const Services: React.FC = () => {
         </div>
         <ScrollAnimation>
           <div className="mt-12 text-center">
-            <a href="#" className="inline-block bg-red-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-red-700 transition-colors duration-300">
+            <a href="/blog" className="inline-block bg-red-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-red-700 transition-colors duration-300">
               Explore All Features
             </a>
           </div>

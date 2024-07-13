@@ -27,7 +27,7 @@ const About = () => {
       <div className="container mx-auto px-4">
         <ScrollAnimation>
           <h2 className="text-4xl font-bold mb-12 text-center text-gray-800 dark:text-white">
-            About <span className="text-red-600">PlanetMovies</span>
+            About <span className="text-red-600">Planet Movies</span>
           </h2>
         </ScrollAnimation>
 
@@ -36,7 +36,7 @@ const About = () => {
             <ScrollAnimation>
               <h3 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-white">Our Mission</h3>
               <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                At PlanetMovies, we're passionate about connecting people with great entertainment.
+                At Planet Movies, we're passionate about connecting people with great entertainment.
                 Our mission is to help you discover new movies and TV shows that you'll love,
                 based on your personal preferences and viewing history.
               </p>
@@ -76,7 +76,7 @@ const About = () => {
 
         <ScrollAnimation>
           <div className="mt-12 text-center">
-            <a href="#" className="inline-block bg-red-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-red-700 transition-colors duration-300">
+            <a href="/blog" className="inline-block bg-red-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-red-700 transition-colors duration-300">
               Learn More About Us
             </a>
           </div>
