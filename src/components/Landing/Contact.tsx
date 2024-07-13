@@ -29,12 +29,12 @@ const Contact: React.FC = () => {
               <SocialLink href="#" icon={Facebook} label="Facebook" />
               <SocialLink href="#" icon={Twitter} label="Twitter" />
               <SocialLink href="#" icon={Instagram} label="Instagram" />
-              <SocialLink href="mailto:contact@cinevault.com" icon={Mail} label="Email" />
+              <SocialLink href="mailto:contact@PlanetMovies.com" icon={Mail} label="Email" />
             </div>
           </div>
         </div>
         <div className="mt-8 text-center">
-          <p className="text-gray-400">&copy; 2024 Cinevault. All rights reserved.</p>
+          <p className="text-gray-400">&copy; 2024 PlanetMovies. All rights reserved.</p>
         </div>
       </div>
     </ScrollAnimation>

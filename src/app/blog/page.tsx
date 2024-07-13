@@ -11,14 +11,14 @@ import {
 const blogPosts = [
   {
     id: 1,
-    title: 'Our Journey in Building CineVault',
-    summary: 'Discover the story behind CineVault and how we brought our vision to life.',
+    title: 'Our Journey in Building PlanetMovies',
+    summary: 'Discover the story behind PlanetMovies and how we brought our vision to life.',
     date: 'June 28, 2024',
   },
   {
     id: 2,
-    title: 'The Technology Behind CineVault',
-    summary: 'Learn about the technologies and tools we used to build CineVault.',
+    title: 'The Technology Behind PlanetMovies',
+    summary: 'Learn about the technologies and tools we used to build PlanetMovies.',
     date: 'July 1, 2024',
   },
 ];
@@ -30,7 +30,7 @@ const BlogPage = () => {
       <main className="flex-grow">
         {/* Blog Section */}
         <section className="bg-gray-100 dark:bg-gray-800 p-4" id="blog">
-          <h2 className="text-4xl font-bold mb-6">CineVault Blog</h2>
+          <h2 className="text-4xl font-bold mb-6">PlanetMovies Blog</h2>
           <div className="space-y-4">
             {blogPosts.map((post) => (
               <div key={post.id} className="bg-white dark:bg-gray-700 dark:text-white p-4 rounded-lg shadow-md">
