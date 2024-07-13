@@ -108,7 +108,7 @@ CineVault is a comprehensive movie database and recommendation platform leveragi
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/CineVault.git
+   git clone https://github.com/bneayoub/CineVault.git
    cd CineVault
    ```
 
