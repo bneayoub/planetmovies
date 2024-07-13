@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100">
+  <defs>
+    <linearGradient id="planetGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#dc2626;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#991b1b;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="40" fill="url(#planetGradient)" />
+  <path d="M10,50 Q50,0 90,50" stroke="#ffffff" stroke-width="2" fill="none" />
+  <text x="110" y="40" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#991b1b">PLANET</text>
+  <text x="110" y="70" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#dc2626">MOVIES</text>
+  <path d="M110,75 L270,75" stroke="#dc2626" stroke-width="2" />
+  <circle cx="270" cy="75" r="3" fill="#dc2626" />
+</svg>

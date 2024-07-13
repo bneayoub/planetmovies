@@ -26,7 +26,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
         >
-          Welcome to Cinevault
+          Welcome to PlanetMovies
         </motion.h1>
         <motion.p
           className="text-xl md:text-2xl mb-8 text-gray-200"

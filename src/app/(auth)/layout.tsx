@@ -10,7 +10,7 @@ const AuthLayout = ({
   return (
     <div className="min-h-screen flex flex-col relative">
       <Image
-        src="/images/auth-background.jpg" // Make sure to add this image to your public/images folder
+        src="/images/auth-background.jpg"
         layout="fill"
         objectFit="cover"
         alt="Background"
@@ -21,7 +21,15 @@ const AuthLayout = ({
 
       <div className="relative z-10 flex-grow flex flex-col">
         <header className="p-8">
-          <Link href='/'><h1 className="text-4xl font-bold text-red-600">Cinevault</h1></Link>
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logos/logo.svg"
+            alt="PlanetMovies Logo"
+            width={200}
+            height={200}
+            className="mr-2"
+          />
+        </Link>
         </header>
 
         <main className="flex-grow flex items-center justify-center px-4">

@@ -9,7 +9,7 @@ import TopNavbar from "@/components/Landing/TopNavbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CineVault",
+  title: "PlanetMovies",
   description: "Your Best Movie App",
 };
 

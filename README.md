@@ -1,6 +1,6 @@
-# CineVault
+# PlanetMovies
 
-CineVault is a comprehensive movie database and recommendation platform leveraging TMDB API and MongoDB. It offers personalized recommendations, social features, and a seamless user experience.
+PlanetMovies is a comprehensive movie database and recommendation platform leveraging TMDB API and MongoDB. It offers personalized recommendations, social features, and a seamless user experience.
 
 ## Features
 
@@ -108,8 +108,8 @@ CineVault is a comprehensive movie database and recommendation platform leveragi
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/bneayoub/CineVault.git
-   cd CineVault
+   git clone https://github.com/bneayoub/PlanetMovies.git
+   cd PlanetMovies
    ```
 
 2. Install dependencies:
@@ -157,4 +157,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-Thank you for using CineVault! Enjoy your movie discovery journey. For questions or feedback, please reach out to us.
+Thank you for using PlanetMovies! Enjoy your movie discovery journey. For questions or feedback, please reach out to us.
