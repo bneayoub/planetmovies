@@ -120,8 +120,8 @@ PlanetMovies is a comprehensive movie database and recommendation platform lever
 3. Set up environment variables:
    Create a `.env` file in the root directory:
    ```env
-   NEXT_PUBLIC_CLERK_FRONTEND_API=your_clerk_frontend_api
-   CLERK_API_KEY=your_clerk_api_key
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+   CLERK_SECRET_KEY=your_clerk_secret_key
    MONGODB_URI=your_mongodb_uri
    TMDB_API_KEY=your_tmdb_api_key
    ```
